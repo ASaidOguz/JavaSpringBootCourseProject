@@ -1,14 +1,17 @@
 package kodlama.io.Course.business.abstracts;
 
-import kodlama.io.Course.entities.concretes.Course;
+import kodlama.io.Course.business.Requests.CourseRequest;
+import kodlama.io.Course.business.Responses.CourseResponse;
+import kodlama.io.Course.entities.concretes.Language;
 
 import java.util.List;
 
 public interface ICourseService {
-    void add(Course course);
+    List<CourseResponse> getAll();
+    public CourseResponse getResponsebyId(int id);
+    void add(CourseRequest courseRequest) throws Exception;
     void delete(int id);
-    void update(Course course);
+    void update(CourseRequest courseRequest,int id) throws Exception;
+    public Language getbyId(int id);
 
-    List<Course> getAll();
-    Course getById(int id);
 }

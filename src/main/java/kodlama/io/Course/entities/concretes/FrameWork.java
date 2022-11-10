@@ -1,28 +1,31 @@
 package kodlama.io.Course.entities.concretes;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 
 
 @Table(name="frameworks")
 @Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class FrameWork {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
-    @Column(name="frameworks_name")
-    private String FrameWorkName;
+
+    @Column(name = "name")
+    private String name;
 
 
     @ManyToOne
     @JoinColumn(name = "course_id")
-    private Course course ;
+    @JsonIgnore
+    private Language language;
 
 }

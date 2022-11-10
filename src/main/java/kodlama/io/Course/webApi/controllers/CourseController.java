@@ -1,8 +1,10 @@
 package kodlama.io.Course.webApi.controllers;
 
 
+import kodlama.io.Course.business.Requests.CourseRequest;
+import kodlama.io.Course.business.Responses.CourseResponse;
 import kodlama.io.Course.business.abstracts.ICourseService;
-import kodlama.io.Course.entities.concretes.Course;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,33 +13,35 @@ import java.util.List;
 @RequestMapping("/api/courses")
 public class CourseController {
 
-    private ICourseService icourseService;
-
-    public CourseController(ICourseService _icourseService){
-        this.icourseService=_icourseService;
+    private ICourseService iCourseService;
+    @Autowired
+    public CourseController(ICourseService iCourseService){
+        this.iCourseService=iCourseService;
     }
 
-    @PostMapping("add")
-    public void add(Course course){
-       this.icourseService.add(course);
-    }
-    @PostMapping("delete")
-    public void delete(int id){
-        this.icourseService.delete(id);
-    }
-    @PostMapping("update")
-    public void update(Course course){
-        this.icourseService.update(course);
+    @GetMapping("/getall")
+    public List<CourseResponse> getall(){
+        return iCourseService.getAll();
     }
 
-    @GetMapping("getall")
-    public List<Course> getAll(){
-      return this.icourseService.getAll();
+    @GetMapping("/getbyid/{id}")
+    public CourseResponse getById(@PathVariable int id){
+         return iCourseService.getResponsebyId(id);
     }
 
-    @GetMapping("/getbyid")
-    public Course getbyId(int id){
-        return this.icourseService.getById(id);
+    @PostMapping("/add")
+    public void add(@RequestBody CourseRequest courseRequest) throws Exception{
+        iCourseService.add(courseRequest);
+    }
+
+    @DeleteMapping("delete/{id}")
+    public void delete(@PathVariable int id){
+        iCourseService.delete(id);
+    }
+
+    @PutMapping("update/{id}")
+    public void update(@RequestBody CourseRequest courseRequest,int id)throws Exception{
+        iCourseService.update(courseRequest,id);
     }
 
 }
