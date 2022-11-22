@@ -11,3 +11,12 @@ Used Technologies , Frameworks and DB
 - Spring web
 - Jpa Hibernate
 - Postgresql DB
+
+How to install 
+
+- Clone the repository by 
+
+``https://github.com/ASaidOguz/JavaSpringBootCourseProject.git``
+
+- After cloning import it as maven project and let intellij 
+install the neccerray dependencies
